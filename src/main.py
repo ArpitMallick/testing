@@ -1,8 +1,8 @@
-# src/main.py
+# app.py
 
-def main():
-    print("Hello, World!")
+def hello_world():
+    return "Hello, World!"
 
 if __name__ == "__main__":
-    main()
+    print(hello_world())
 
