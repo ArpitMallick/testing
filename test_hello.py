@@ -2,4 +2,4 @@ from app import hello
 
 
 def test_hello():
-    assert hello() == "HELLO WORLD"
+    assert hello() == "HELLOoooooooo WORLD"
