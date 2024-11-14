@@ -1,0 +1,22 @@
+name: Trigger Test
+
+on:
+  repository_dispatch:
+    types:
+      - terraform-deploy
+
+jobs:
+  check-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code from branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Display Payload Information
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Event type: ${{ github.event.event_type }}"
+          echo "Branch: ${{ github.event.inputs.branch }}"
+          echo "Action: ${{ github.event.inputs.tf_action }}"
