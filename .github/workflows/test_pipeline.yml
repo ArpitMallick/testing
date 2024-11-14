@@ -14,6 +14,15 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}
 
+      - name: Get current branch or ref
+        run: |
+          # Get the current branch or ref
+          echo "Current branch/ref: ${{ github.ref }}"
+          git branch --show-current
+
+      - name: Display Trigger Message
+        run: echo "GitHub Actions workflow triggered successfully!"        
+
       - name: Display Payload Information
         run: |
           echo "Event name: ${{ github.event_name }}"
