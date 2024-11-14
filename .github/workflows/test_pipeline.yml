@@ -1,9 +1,6 @@
 name: Trigger Test
 
 on:
-  push:
-    branches:
-      - develop
   workflow_dispatch:  # Allows manual triggering from the GitHub Actions UI
   repository_dispatch:  # Allows external triggering using GitHub API
     types:
