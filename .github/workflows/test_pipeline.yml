@@ -1,0 +1,17 @@
+name: Trigger Test
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:  # Allows manual triggering from the GitHub Actions UI
+  repository_dispatch:  # Allows external triggering using GitHub API
+    types:
+      - terraform-deploy  # Specify the custom event type to listen for
+
+jobs:
+  check-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display Trigger Message
+        run: echo "GitHub Actions workflow triggered successfully!"
