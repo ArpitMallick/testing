@@ -12,6 +12,19 @@ on:
 jobs:
   check-trigger:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout the repository from the branch in the payload
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.client_payload.branch }}
+      
       - name: Display Trigger Message
         run: echo "GitHub Actions workflow triggered successfully!"
+
+      - name: Debug Event Details
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Event type: ${{ github.event.event_type }}"
+          echo "Payload Branch: ${{ github.event.client_payload.branch }}"
+          echo "Client Payload Action: ${{ github.event.client_payload.tf_action }}"
