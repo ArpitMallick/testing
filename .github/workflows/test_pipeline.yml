@@ -1,14 +1,6 @@
 name: Trigger Test
 
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to deploy'
-        required: true
-      tf_action:
-        description: 'Terraform Action'
-        required: true
   repository_dispatch:
     types:
       - terraform-deploy
