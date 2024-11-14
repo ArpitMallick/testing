@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code from branch
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.inputs.branch }}
+          ref: ${{ github.event.client_payload.branch }}
 
       - name: Get current branch or ref
         run: |
@@ -26,6 +26,6 @@ jobs:
       - name: Display Payload Information
         run: |
           echo "Event name: ${{ github.event_name }}"
-          echo "Event type: ${{ github.event.event_type }}"
-          echo "Branch: ${{ github.event.inputs.branch }}"
-          echo "Action: ${{ github.event.inputs.tf_action }}"
+          echo "Event type: ${{ github.event.action }}"
+          echo "Branch: ${{ github.event.client_payload.branch }}"
+          echo "Action: ${{ github.event.client_payload.tf_action }}"
