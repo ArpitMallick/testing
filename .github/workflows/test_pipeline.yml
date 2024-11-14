@@ -1,27 +1,30 @@
 name: Trigger Test
 
 on:
-  workflow_dispatch:  # Allows manual triggering from the GitHub Actions UI
-  repository_dispatch:  # Allows external triggering using GitHub API
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: true
+      tf_action:
+        description: 'Terraform Action'
+        required: true
+  repository_dispatch:
     types:
-      - terraform-deploy  # Specify the custom event type to listen for
+      - terraform-deploy
 
 jobs:
   check-trigger:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout the repository from the branch in the payload
+      - name: Checkout code from branch
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.client_payload.branch }}
-      
-      - name: Display Trigger Message
-        run: echo "GitHub Actions workflow triggered successfully!"
+          ref: ${{ github.event.inputs.branch }}
 
-      - name: Debug Event Details
+      - name: Display Payload Information
         run: |
           echo "Event name: ${{ github.event_name }}"
           echo "Event type: ${{ github.event.event_type }}"
-          echo "Payload Branch: ${{ github.event.client_payload.branch }}"
-          echo "Client Payload Action: ${{ github.event.client_payload.tf_action }}"
+          echo "Branch: ${{ github.event.inputs.branch }}"
+          echo "Action: ${{ github.event.inputs.tf_action }}"
